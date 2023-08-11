@@ -1,13 +1,12 @@
 import datetime
 
-def show_balance(user, bank):
+def show_balance(account):
     pass
-def withdraw_money(user, bank, amount):
+def withdraw_money(account, amount):
     pass
 
 
-def deposit_money(user, bank, amount):
-    account = bank.accounts[user]
+def deposit_money(account, amount):
     nature = 'credit'
     account.update_balance(amount, nature)
     id = len(account.transactions)+1
@@ -16,13 +15,12 @@ def deposit_money(user, bank, amount):
     transaction = {'id':id, 'date':date, 'nature':nature, 'desc': desc} #{id:, date:, amt:, nature:, desc:}
     account.update_transanction(transaction)
 
-def transfer_money(user, bank, amount, from_user, to_user):
-    
-    
-    return transaction
+def transfer_money(amount, from_acc, to_acc):
+    from_acc.update_balance(amount, 'debit')
+    to_acc.update_balance(amount, 'credit')
 
-def display_trans(user, bank):
-    
-    
-    
-    return transaction
+def display_trans(account):
+    trans = account.transactions[-10:]
+    for tran in trans:
+        for k,v in tran.items():
+            print(f"{k}: {v}\n")
