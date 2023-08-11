@@ -1,8 +1,0 @@
-class Account:
-    def __init__(self, transactions, balance):
-        self.balance = balance
-        self.transactions = transactions #{id:, date:, amt:, nature:, desc:}
-        def update_transaction(self, transaction):
-            pass
-        def update_balance(self, balance, nature):
-            pass
