@@ -71,4 +71,5 @@ user_accounts = {
     "Olivia Taylor": Account("4567890123", [], 0)
 }
 
+#Run script
 main()
