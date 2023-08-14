@@ -64,7 +64,7 @@ def main():
                 print(f"Description: {withdraw_transaction['desc']}")
                 print("------------------------")
             else:
-                print(f"Insufficient balance in {from_user}'s account for transfer.")
+                print(f"Insufficient balance in {from_user}'s account for transfer or {to_user}'s account doesn't exist")
             continue
         elif service == 4:
             show_balance(user, bank)
