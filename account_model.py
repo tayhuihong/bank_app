@@ -7,5 +7,6 @@ class Account:
             self.balance += amount
         elif nature == 'debit':
             self.balance -= amount
+
     def update_transaction(self, transaction):
         self.transactions.append(transaction)
