@@ -1,6 +1,6 @@
 from bank_module import show_balance, withdraw_money, deposit_money, transfer_money, display_trans
-from bank_model import Account
-from account_model import Bank
+from bank_model import Bank
+from account_model import Account
 
 
 def main():
