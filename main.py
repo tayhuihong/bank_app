@@ -25,38 +25,41 @@ def main():
             print(f"Nature: {transaction['nature']}")
             print(f"Description: {transaction['desc']}")
             print("------------------------")
-
+            continue
         elif service == 2:
             amount = float(input("Please input the withdraw amount: "))
             transaction = withdraw_money(user, bank, amount)
-
             print(f"Transaction ID: {transaction['id']}")
             print(f"Date: {transaction['date']}")
             print(f"Amount: {transaction['amt']}")
             print(f"Nature: {transaction['nature']}")
             print(f"Description: {transaction['desc']}")
             print("------------------------")
-
+            continue
         elif service == 3:
             from_user = user
             to_user = input("Who is the recipient?").strip()
             amount = float(input("What is the transfer amount?"))
-            withdraw_transaction, deposit_transaction = transfer_money(bank, amount, from_user, to_user)
-
+            withdraw_transaction = transfer_money(bank, amount, from_user, to_user)
             print(f"Transaction ID: {withdraw_transaction['id']}")
             print(f"Date: {withdraw_transaction['date']}")
             print(f"Amount: {withdraw_transaction['amt']}")
             print(f"Nature: {withdraw_transaction['nature']}")
             print(f"Description: {withdraw_transaction['desc']}")
             print("------------------------")
-
+            continue
         elif service == 4:
             show_balance(user, bank)
+            continue
         elif service == 5:
             display_trans(user, bank)
+            continue
         elif service == 6:
             end = True
             print("Quit")
+        else:
+            print("Please enter a valid choice: ")
+            continue
 
 user_accounts = {
     "John Doe": Account("1234567890", [], 0),
