@@ -1,7 +1,8 @@
 class Account:
-    def __init__(self, transactions, balance):
+    def __init__(self, acNum, transactions, balance):
         self.balance = balance
-        self.transactions = transactions #{id:, date:, amt:, nature:, desc:}
+        self.transactions = transactions
+        self.acNum = acNum
     def update_balance(self, amount, nature):
         if nature == 'credit':
             self.balance += amount

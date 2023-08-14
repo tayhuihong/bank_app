@@ -54,13 +54,9 @@ def withdraw_money(user, bank, amount):
 
     transaction = {'id': id, 'date': date, 'nature': nature, 'amt': amount, 'desc': desc}
     account.update_transaction(transaction)
-    
-    print(f"Transaction ID: {transaction['id']}")
-    print(f"Date: {transaction['date']}")
-    print(f"Nature: {transaction['nature']}")
-    print(f"Amount: {transaction['amt']}")
-    print(f"Description: {transaction['desc']}")
-    print("------------------------")
+
+    return transaction
+
 
 
 def deposit_money(user, bank, amount):
@@ -84,32 +80,17 @@ def deposit_money(user, bank, amount):
     
                
 
-def transfer_money(user, bank, amount, from_user, to_user):
+def transfer_money(bank, amount, from_user, to_user):
     if from_user in bank.accounts and to_user in bank.accounts:
         from_account = bank.accounts[from_user]
         to_account = bank.accounts[to_user]
 
         # sufficient balance for transfer?
         if from_account.balance >= amount:
-            
-            # Update balances 
-            from_account.update_balance(amount, 'debit')
-            to_account.update_balance(amount, 'credit')
+            withdraw_trans = withdraw_money(from_user, bank, amount)
+            deposit_trans = deposit_money(to_user, bank, amount)
 
-            from_id = len(from_account.transactions) + 1
-            from_date = datetime.today().strftime("%d/%m")
-            from_desc = f"Transfer to {to_user}"
-            from_transaction = {'id': from_id, 'date': from_date, 'amt': amount, 'nature': 'debit', 'desc': from_desc}
-            from_account.update_transaction(from_transaction)
-
-            
-            to_id = len(to_account.transactions) + 1
-            to_date = datetime.today().strftime("%d/%m")
-            to_desc = f"Transfer from {from_user}"
-            to_transaction = {'id': to_id, 'date': to_date, 'amt': amount, 'nature': 'credit', 'desc': to_desc}
-            to_account.update_transaction(to_transaction)
-
-            return True
+            return withdraw_trans, deposit_trans
         else:
             print(f"Insufficient balance in {from_user}'s account for transfer.")
             return False
@@ -142,8 +123,8 @@ def main():
     end = False
     user = input("What is your name?").strip()
     bank = Bank(user_accounts)
-    
-    while end== False:
+
+    while not end:
         service = int(input('''Choose a service!\n
                         1: Deposit\n
                         2: Withdraw\n
@@ -153,15 +134,38 @@ def main():
                         6: Quit'''))
         if service == 1:
             amount = float(input("Please input the deposit amount: "))
-            deposit_money(user, bank, amount)
+            transaction = deposit_money(user, bank, amount)
+            print(f"Transaction ID: {transaction['id']}")
+            print(f"Date: {transaction['date']}")
+            print(f"Amount: {transaction['amt']}")
+            print(f"Nature: {transaction['nature']}")
+            print(f"Description: {transaction['desc']}")
+            print("------------------------")
+
         elif service == 2:
             amount = float(input("Please input the withdraw amount: "))
-            withdraw_money(user, bank, amount)
+            transaction = withdraw_money(user, bank, amount)
+
+            print(f"Transaction ID: {transaction['id']}")
+            print(f"Date: {transaction['date']}")
+            print(f"Amount: {transaction['amt']}")
+            print(f"Nature: {transaction['nature']}")
+            print(f"Description: {transaction['desc']}")
+            print("------------------------")
+
         elif service == 3:
             from_user = user
             to_user = input("Who is the recipient?").strip()
-            amount = float(input("What is the transer amount?"))
-            transfer_money(user, bank, amount, from_user, to_user)
+            amount = float(input("What is the transfer amount?"))
+            withdraw_transaction, deposit_transaction = transfer_money(bank, amount, from_user, to_user)
+
+            print(f"Transaction ID: {withdraw_transaction['id']}")
+            print(f"Date: {withdraw_transaction['date']}")
+            print(f"Amount: {withdraw_transaction['amt']}")
+            print(f"Nature: {withdraw_transaction['nature']}")
+            print(f"Description: {withdraw_transaction['desc']}")
+            print("------------------------")
+
         elif service == 4:
             show_balance(user, bank)
         elif service == 5:
@@ -169,6 +173,6 @@ def main():
         elif service == 6:
             end = True
             print("Quit")
-            
-        
+
 main()
+
