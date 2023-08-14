@@ -1,11 +1,9 @@
 from datetime import date
 
 
-def show_balance(user, bank, account):
+def show_balance(user, bank):
     account = bank.accounts[user]
-    print(account.balance)
-
-
+    print('$',account.balance)
 
 def withdraw_money(user, bank, amount):
     account = bank.accounts[user]
@@ -54,8 +52,7 @@ def transfer_money(bank, amount, from_user, to_user):
         else:
             return None
     else:
-        print("One or both users do not have an account.")
-        return False
+        return None
 
 
 def display_trans(user, bank):
@@ -63,10 +60,11 @@ def display_trans(user, bank):
         account = bank.accounts[user]
         transactions = account.transactions
         if len(transactions) > 0:
+            transactions = transactions[-10:]
             for transaction in transactions:
                 print(f"Transaction ID: {transaction['id']}")
                 print(f"Date: {transaction['date']}")
-                print(f"Amount: {transaction['amt']}")
+                print(f"Amount: ${transaction['amt']}")
                 print(f"Nature: {transaction['nature']}")
                 print(f"Description: {transaction['desc']}")
                 print("------------------------")

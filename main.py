@@ -21,19 +21,19 @@ def main():
     bank = Bank(user_accounts)
 
     while not end:
-        service = int(input('''Choose a service!\n
-                        1: Deposit\n
-                        2: Withdraw\n
-                        3: Transfer\n
-                        4: Show Balance\n
-                        5: Display Transactions\n
-                        6: Quit\n'''))
+        service = int(input('''Choose a service!
+1: Deposit
+2: Withdraw
+3: Transfer
+4: Show Balance
+5: Display Transactions
+6: Quit\n'''))
         if service == 1:
             amount = float(input("Please input the deposit amount: "))
             transaction = deposit_money(user, bank, amount)
             print(f"Transaction ID: {transaction['id']}")
             print(f"Date: {transaction['date']}")
-            print(f"Amount: {transaction['amt']}")
+            print(f"Amount: ${transaction['amt']}")
             print(f"Nature: {transaction['nature']}")
             print(f"Description: {transaction['desc']}")
             print("------------------------")
@@ -44,7 +44,7 @@ def main():
             if transaction:
                 print(f"Transaction ID: {transaction['id']}")
                 print(f"Date: {transaction['date']}")
-                print(f"Amount: {transaction['amt']}")
+                print(f"Amount: ${transaction['amt']}")
                 print(f"Nature: {transaction['nature']}")
                 print(f"Description: {transaction['desc']}")
                 print("------------------------")
@@ -59,7 +59,7 @@ def main():
             if withdraw_transaction:
                 print(f"Transaction ID: {withdraw_transaction['id']}")
                 print(f"Date: {withdraw_transaction['date']}")
-                print(f"Amount: {withdraw_transaction['amt']}")
+                print(f"Amount: ${withdraw_transaction['amt']}")
                 print(f"Nature: {withdraw_transaction['nature']}")
                 print(f"Description: {withdraw_transaction['desc']}")
                 print("------------------------")
@@ -74,7 +74,7 @@ def main():
             continue
         elif service == 6:
             end = True
-            print("Quit")
+            print("Thank you for using")
         else:
             print("Please enter a valid choice: ")
             continue
